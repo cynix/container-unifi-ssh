@@ -1,5 +1,6 @@
 FROM docker.io/library/alpine:latest
 
 RUN apk add --no-cache openssh-client
+COPY usr/bin/unifi-ssh /usr/bin/unifi-ssh
 
-ENTRYPOINT ["/bin/sh", "-c", "exec ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p $(cat /var/run/ssh_proxy_port) -q root@localhost -- \"$@\"", "--"]
+ENTRYPOINT ["/usr/bin/unifi-ssh"]
